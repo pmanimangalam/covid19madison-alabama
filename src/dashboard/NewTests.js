@@ -3,11 +3,10 @@ import ChartistGraph from 'react-chartist';
 import ChartistTooltip from 'chartist-plugin-tooltips-updated';
 import { formatCountyDailyCounts } from './../utils/formatCountyDailyCounts';
 
-
-export default function CumulativeTests({countyDailyCounts}) {
+export default function NewTests({countyDailyCounts}) {
 
   var config = {};
-  config = formatCountyDailyCounts(countyDailyCounts,'tested');
+  config = formatCountyDailyCounts(countyDailyCounts,'testedPerDay');
 
   var data = {
     labels: config?.labels,
@@ -47,7 +46,7 @@ export default function CumulativeTests({countyDailyCounts}) {
 
   return (
     <div className="db-cumulative-tests">
-      <h3>Cumulative Tests</h3>
+      <h3>Tests Per Day</h3>
       <ChartistGraph data={data} options={options} type={type} />
     </div>
   )

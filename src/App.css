@@ -4,3 +4,63 @@
 .App-Body{
   padding: 20px;
 }
+
+.db-cumulative-cases .ct-series-a .ct-line, .db-cumulative-cases .ct-series-a .ct-point, .db-cumulative-cases .ct-series-a .ct-area {
+  stroke: #3F51B5;
+}
+.db-cumulative-cases .ct-series-a .ct-area {
+  fill: #3F51B5;
+}
+
+.db-cumulative-deaths .ct-series-a .ct-line, .db-cumulative-deaths .ct-series-a .ct-point, .db-cumulative-deaths .ct-series-a .ct-area {
+  stroke: #F44336;
+}
+.db-cumulative-deaths .ct-series-a .ct-area {
+  fill: #F44336;
+}
+
+.db-cumulative-tests .ct-series-a .ct-line, .db-cumulative-tests .ct-series-a .ct-point, .db-cumulative-tests .ct-series-a .ct-area {
+  stroke:#9C27B0;
+}
+.db-cumulative-tests .ct-series-a .ct-area {
+  fill: #9C27B0;
+}
+
+.ct-chart {
+  position: relative;
+}
+
+.chartist-tooltip {
+  position: absolute;
+  display: inline-block;
+  opacity: 0;
+  min-width: 5em;
+  padding: 0.5em;
+  background: #ddd;
+  color: #453d3f;
+  font-family: Oxygen, Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  text-align: center;
+  pointer-events: none;
+  z-index: 1;
+  -webkit-transition: opacity 0.2s linear;
+  -moz-transition: opacity 0.2s linear;
+  -o-transition: opacity 0.2s linear;
+  transition: opacity 0.2s linear;
+}
+
+.chartist-tooltip:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  margin-left: -15px;
+  border: 15px solid transparent;
+  border-top-color: #ddd;
+}
+
+.chartist-tooltip.tooltip-show {
+  opacity: 1;
+}

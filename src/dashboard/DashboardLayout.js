@@ -7,8 +7,11 @@ import TotalDeaths from './TotalDeaths';
 import CasesYesterday from './CasesYesterday';
 import TestsReported from './TestsReported';
 import CumulativeCases from './CumulativeCases';
+import NewCases from './NewCases';
 import CumulativeDeaths from './CumulativeDeaths';
+import NewDeaths from './NewDeaths';
 import CumulativeTests from './CumulativeTests';
+import NewTests from './NewTests';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -33,34 +36,51 @@ export default function DashboardLayout({countyData, totalCasesData, totalDeaths
               <br /><br />
         </Grid>
       </Grid>
-      <Grid container spacing={3}>
 
+      <Grid container spacing={5}>
         <Grid item lg={3} md={4} sm={6} xs={12}>
               <TotalCases totalCases={totalCasesData} />
         </Grid>
-
         <Grid item lg={3} md={4} sm={6} xs={12}>
               <TotalDeaths totalDeaths={totalDeathsData}/>
         </Grid>
-
         <Grid item lg={3} md={4} sm={6} xs={12}>
               <CasesYesterday casesYesterday={casesYesterdayData}/>
         </Grid>
-
         <Grid item lg={3} md={4} sm={6} xs={12}>
               <TestsReported testsReported={testsReportedData}/>
         </Grid>
-
       </Grid>
 
-      <br />
-      <CumulativeCases countyDailyCounts={countyDailyCountsData} />
+      <Grid container spacing={3}>
+        <Grid item lg={6} md={6} sm={6} xs={12}>
+          <CumulativeCases countyDailyCounts={countyDailyCountsData} />
+        </Grid>
 
-      <br />
-      <CumulativeDeaths countyDailyCounts={countyDailyCountsData} />
+        <Grid item lg={6} md={6} sm={6} xs={12}>
+          <NewCases countyDailyCounts={countyDailyCountsData} />
+        </Grid>
+      </Grid>
+      
+      <Grid container spacing={3}>
+        <Grid item lg={6} md={6} sm={6} xs={12}>
+          <CumulativeDeaths countyDailyCounts={countyDailyCountsData} />
+        </Grid>
 
-      <br />
-      <CumulativeTests countyDailyCounts={countyDailyCountsData} />
+        <Grid item lg={6} md={6} sm={6} xs={12}>
+          <NewDeaths countyDailyCounts={countyDailyCountsData} />
+        </Grid>
+      </Grid>
+
+      <Grid container spacing={3}>
+        <Grid item lg={6} md={6} sm={6} xs={12}>
+          <CumulativeTests countyDailyCounts={countyDailyCountsData} />
+        </Grid>
+
+        <Grid item lg={6} md={6} sm={6} xs={12}>
+          <NewTests countyDailyCounts={countyDailyCountsData} />
+        </Grid>
+      </Grid>
 
     </div>
   );

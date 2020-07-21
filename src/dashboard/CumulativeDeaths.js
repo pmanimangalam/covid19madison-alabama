@@ -1,52 +1,39 @@
 import React from 'react';
 import ChartistGraph from 'react-chartist';
+import { formatCountyDailyCounts } from './../utils/formatCountyDailyCounts';
 
 export default function CumulativeDeaths({countyDailyCounts}) {
 
-  function setDataAndOptions(countyDailyCounts) {
-    var series = {
-      data : [],
-      high : 0,
-      low  : 0,
-      labels : []
-    };
-    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    var dayTime = 24*60*60*1000;
-    let dateLabels = null;
-    let checkDate = null;
-    for (const dailyCounts of countyDailyCounts) {
-      checkDate = new Date(new Date(dailyCounts?.date).getTime() + dayTime).getDate();
-      if((checkDate === 1) || (checkDate === 15)) {
-        series.data.push(dailyCounts?.deaths);
-        dateLabels = new Date(new Date(dailyCounts?.date).getTime() + dayTime);
-        series.labels.push((dateLabels.getDate()) + ' ' + months[dateLabels.getMonth()]);
-      }
-    }
-    series.high = Math.max(...series.data);
-    series.low  = Math.min(...series.data);
-    return series;
-  }
+  var config = {};
+  config = formatCountyDailyCounts(countyDailyCounts,'deaths');
 
   var data = {
-    labels: setDataAndOptions(countyDailyCounts)['labels'],
-    series: [setDataAndOptions(countyDailyCounts)['data']]
+    labels: config?.labels,
+    series: [config?.series]
   };
 
   var options = {
-    high: setDataAndOptions(countyDailyCounts)['high'],
-    low:  setDataAndOptions(countyDailyCounts)['low'],
+    high: config?.high,
+    low:  config?.low,
     axisX: {
       labelInterpolationFnc: function(value, index) {
-        return value;
+        var res = value.split(" ");
+        if((Number(res[0]) === 1) || (Number(res[0]) === 15)) {
+          return value;
+        } else {
+          return null;
+        }
       }
     },
     showArea: true,
+    showPoint: false,
+    height: '250px',
   };
 
   var type = 'Line';
 
   return (
-    <div>
+    <div className="db-cumulative-deaths">
       <h3>Cumulative Deaths</h3>
       <ChartistGraph data={data} options={options} type={type} />
     </div>

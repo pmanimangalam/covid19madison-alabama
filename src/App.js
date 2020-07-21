@@ -4,6 +4,7 @@ import * as Constants from './constants';
 
 import DashboardHeader from './header/Header';
 import DashboardLayout from './dashboard/DashboardLayout';
+import Typography from '@material-ui/core/Typography';
 import PageLoading from './page/loading';
 
 const App =() =>{
@@ -43,7 +44,39 @@ const App =() =>{
     setTotalDeaths(data[data.length - 1]);
     setCasesYesterday(data[data.length - 2]);
     setTestsReported(data[data.length - 1]);
-    setCountyDailyCounts(data);
+
+    const dataScale = [];
+    let preCaseValue = 0;
+    let nxtCaseValue = 0;
+
+    let preDeathValue = 0;
+    let nxtDeathValue = 0;
+
+    let preTestedValue = 0;
+    let nxtTestedValue = 0;
+
+    for(let dataIndex in data){
+      preCaseValue = (dataIndex === 0)?0:data[dataIndex -1]?.cases;
+      nxtCaseValue = data[dataIndex]?.cases;
+
+      preDeathValue = (dataIndex === 0)?0:data[dataIndex -1]?.deaths;
+      nxtDeathValue = data[dataIndex]?.deaths;
+
+      preTestedValue = (dataIndex === 0)?0:data[dataIndex -1]?.tested;
+      nxtTestedValue = data[dataIndex]?.tested;
+
+      dataScale.push({
+        cases: data[dataIndex]?.cases,
+        casesPerDay: (nxtCaseValue - preCaseValue < 0)?0:nxtCaseValue - preCaseValue,
+        date: data[dataIndex]?.date,
+        deaths: data[dataIndex]?.deaths,
+        deathsPerDay: (nxtDeathValue - preDeathValue < 0)?0:nxtDeathValue - preDeathValue,
+        tested: data[dataIndex]?.tested,
+        testedPerDay: (nxtTestedValue - preTestedValue < 0)?0:nxtTestedValue - preTestedValue,
+      })
+    }
+    console.log(dataScale);
+    setCountyDailyCounts(dataScale);
   }
 
 
@@ -54,7 +87,10 @@ const App =() =>{
 
       <div className="App-Body">
 
-        <h1 className="text-center">Madison County COVID-19 Cases</h1>
+        <Typography variant="h4" component="h1" color="inherit" className="text-center">
+          Madison County COVID-19 Cases
+        </Typography>
+
         <br />
 
         <DashboardLayout 
