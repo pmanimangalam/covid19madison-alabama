@@ -1,11 +1,12 @@
 import React from 'react';
 import ChartistGraph from 'react-chartist';
 import { formatCountyDailyCounts } from './../utils/formatCountyDailyCounts';
+import ChartistTooltip from 'chartist-plugin-tooltips-updated';
 
 export default function NewCases({countyDailyCounts}) {
   
   var config = {};
-  config = formatCountyDailyCounts(countyDailyCounts,'casesPerDay');
+  config = formatCountyDailyCounts(countyDailyCounts,'casesPerDay',true);
 
   var data = {
     labels: config?.labels,
@@ -26,8 +27,13 @@ export default function NewCases({countyDailyCounts}) {
       }
     },
     showArea: true,
-    showPoint: false,
+    showPoint: true,
     height: '250px',
+    plugins: [
+      ChartistTooltip({
+        appendToBody: true
+      })
+    ],
   };
 
   var type = 'Line';

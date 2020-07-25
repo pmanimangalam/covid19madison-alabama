@@ -5,9 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import GitHubIcon from '@material-ui/icons/GitHub';
-import Link from '@material-ui/core/Link';
-import Tooltip from '@material-ui/core/Tooltip';
+import Logo from './Logo';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -38,12 +36,8 @@ export default function DenseAppBar() {
           </Typography>
 
           <div className={classes.grow} />
-          
-          <Tooltip title="Github repository">
-            <Link href="https://github.com" color="inherit" target="_blank" aria-label="Github repository">
-                <GitHubIcon/>
-            </Link>
-          </Tooltip>
+
+          <Logo />
           
         </Toolbar>
       </AppBar>

@@ -7,7 +7,7 @@ import { formatCountyDailyCounts } from './../utils/formatCountyDailyCounts';
 export default function CumulativeTests({countyDailyCounts}) {
 
   var config = {};
-  config = formatCountyDailyCounts(countyDailyCounts,'tested');
+  config = formatCountyDailyCounts(countyDailyCounts,'tested',true);
 
   var data = {
     labels: config?.labels,
@@ -18,8 +18,7 @@ export default function CumulativeTests({countyDailyCounts}) {
     high: config?.high,
     low:  config?.low,
     showArea: true,
-    showPoint: false,
-    //width: '100%',
+    showPoint: true,
     height: '250px',
     lineSmooth: true,
     axisX: {
@@ -36,11 +35,27 @@ export default function CumulativeTests({countyDailyCounts}) {
     axisY: {
       showGrid: true,
     },
-    // plugins: [
-    //   ChartistTooltip({
-    //     appendToBody: true
-    //   })
-    // ]
+    // classNames: {
+    //   chart: 'ct-chart-line',
+    //   label: 'ct-label',
+    //   labelGroup: 'ct-labels',
+    //   series: 'ct-series',
+    //   line: 'db-cumulative-test-ct-line',
+    //   point: 'db-cumulative-test-ct-circle',
+    //   area: 'db-cumulative-test-ct-area',
+    //   grid: 'ct-grid',
+    //   gridGroup: 'ct-grids',
+    //   gridBackground: 'ct-grid-background',
+    //   vertical: 'ct-vertical',
+    //   horizontal: 'ct-horizontal',
+    //   start: 'ct-start',
+    //   end: 'ct-end'
+    // },
+    plugins: [
+      ChartistTooltip({
+        appendToBody: true
+      })
+    ]
   };
 
   var type = 'Line';

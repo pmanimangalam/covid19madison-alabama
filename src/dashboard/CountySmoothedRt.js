@@ -1,12 +1,12 @@
 import React from 'react';
 import ChartistGraph from 'react-chartist';
-import { formatCountyDailyCounts } from './../utils/formatCountyDailyCounts';
+import { formatCountyDailyCounts } from '../utils/formatCountyDailyCounts';
 import ChartistTooltip from 'chartist-plugin-tooltips-updated';
 
-export default function CumulativeCases({countyDailyCounts}) {
+export default function CountySmoothedRt({countyDailySmoothedRt}) {
   
   var config = {};
-  config = formatCountyDailyCounts(countyDailyCounts,'cases',true);
+  config = formatCountyDailyCounts(countyDailySmoothedRt,'r_t_most_likely',true);
 
   var data = {
     labels: config?.labels,
@@ -39,8 +39,8 @@ export default function CumulativeCases({countyDailyCounts}) {
   var type = 'Line';
 
   return (
-    <div className="db-cumulative-cases">
-      <h3>Cumulative Cases</h3>
+    <div className="db-rt-daily">
+      <h3>Rt Per Day (Smooth)</h3>
       <ChartistGraph data={data} options={options} type={type} />
     </div>
   )
