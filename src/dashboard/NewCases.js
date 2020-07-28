@@ -6,7 +6,7 @@ import ChartistTooltip from 'chartist-plugin-tooltips-updated';
 export default function NewCases({countyDailyCounts}) {
   
   var config = {};
-  config = formatCountyDailyCounts(countyDailyCounts,'casesPerDay',true);
+  config = formatCountyDailyCounts(countyDailyCounts,'casesPerDay');
 
   var data = {
     labels: config?.labels,
@@ -26,21 +26,22 @@ export default function NewCases({countyDailyCounts}) {
         }
       }
     },
-    showArea: true,
-    showPoint: true,
     height: '250px',
-    plugins: [
-      ChartistTooltip({
-        appendToBody: true
-      })
-    ],
+    showPoint: true,
+    showArea: true,
+    // plugins: [
+    //   ChartistTooltip({
+    //     appendToBody: true
+    //   })
+    // ],
   };
 
-  var type = 'Line';
+  
+  var type = 'Bar';
 
   return (
-    <div className="db-cumulative-cases">
-      <h3>New Cases Per Day</h3>
+    <div className="db-new-cases">
+      <h3>New cases for the County</h3>
       <ChartistGraph data={data} options={options} type={type} />
     </div>
   )

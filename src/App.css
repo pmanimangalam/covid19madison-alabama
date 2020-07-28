@@ -1,8 +1,27 @@
 .text-center {
   text-align: center;
 }
-.App-Body{
+.font-700 {
+  font-weight: 700 !important;
+}
+.App-Body {
   padding: 20px;
+}
+
+.db-new-cases .ct-series-a .ct-bar {
+	opacity: 0.9;
+  stroke: #3F51B5;
+  stroke-width: 8px;
+}
+.db-new-cases .ct-series-a .ct-line {
+	opacity: 0.95;
+	stroke: #3F51B5;
+} 
+.db-new-cases .ct-series-a .ct-point {
+	stroke: #3F51B5;
+}
+.db-new-cases .ct-series-a .ct-slice-donut {
+	stroke: #3F51B5;
 }
 
 .db-cumulative-cases .ct-series-a .ct-line {

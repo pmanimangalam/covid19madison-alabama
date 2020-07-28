@@ -10,18 +10,20 @@ export function formatCountyDailyCounts(countyDailyCounts,seriesKey,labelPlugin)
     var dayTime = 24*60*60*1000;
     let dateLabels = null;
     let makeDate = null;
+    let seriesValue = 0;
     for (const dailyCounts of countyDailyCounts) {
         makeDate = new Date(new Date(dailyCounts?.date).getTime() + dayTime);
         dateLabels = makeDate.getDate() + ' ' + months[makeDate.getMonth()];
+        seriesValue = isNaN(dailyCounts?.[seriesKey])?0:dailyCounts?.[seriesKey];
         config.labels.push(dateLabels);
 
         if(checkLabelPlugin) {
             config.series.push({
                 meta: dateLabels,
-                value: dailyCounts?.[seriesKey]
+                value: seriesValue
             });
         } else{
-            config.series.push(dailyCounts?.[seriesKey]);
+            config.series.push(seriesValue);
         }
     }
     config.high = Math.max(...config.series);

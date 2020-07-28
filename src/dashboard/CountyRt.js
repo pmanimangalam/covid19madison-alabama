@@ -41,7 +41,7 @@ export default function CountyRt({countyDailyRt}) {
 
   return (
     <div className="db-rt-daily">
-      <h3>Rt Per Day</h3>
+      <h3>R<sub>t</sub> value (unsmoothed) for the County</h3>
       <ChartistGraph data={data} options={options} type={type} />
     </div>
   )

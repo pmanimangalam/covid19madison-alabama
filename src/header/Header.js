@@ -31,7 +31,7 @@ export default function DenseAppBar() {
             <MenuIcon />
           </IconButton>
 
-          <Typography variant="h6" color="inherit">
+          <Typography variant="h4" color="inherit" className="font-700">
             Madison County Dashboard
           </Typography>
 

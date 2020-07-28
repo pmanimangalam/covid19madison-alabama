@@ -4,10 +4,13 @@ import * as Constants from './constants';
 
 import DashboardHeader from './header/Header';
 import DashboardLayout from './dashboard/DashboardLayout';
+import DashboardFooter from './footer/Footer';
 import Typography from '@material-ui/core/Typography';
 import { csvToJson } from './utils/csvToJson';
 
 import PageLoading from './page/loading';
+import LastUpdated from './page/LastUpdated';
+
 
 const App =() =>{
 
@@ -22,6 +25,7 @@ const App =() =>{
   const [testsReported, setTestsReported] = useState();
 
   const [loading, setLoading] = useState(true);
+  const date = new Date();
 
   useEffect(() =>{
     getAlCounties();
@@ -32,16 +36,17 @@ const App =() =>{
 
   const getAlCounties = async () => {
     let api_url = Constants.AL_COUNTIES;
-    setLoading(true);
+    //setLoading(true);
     setAlCountyDetails({});
     const response = await fetch(api_url);
     const data = await response.json();
     setAlCountyDetails(data[44]);
-    setLoading(false);
+    //setLoading(false);
   }
 
   const getAlCountyDailyCounts = async () => {
     let api_url = Constants.AL_MADISON_DAILY_COUNTS;
+    setLoading(true);
     setTotalCases({});
     setTotalDeaths({});
     setCasesYesterday({});
@@ -86,6 +91,7 @@ const App =() =>{
       })
     }
     setCountyDailyCounts(dataScale);
+    setLoading(false);
   }
 
   const getAlCountyDailyRt = async () => {
@@ -114,9 +120,13 @@ const App =() =>{
 
       <div className="App-Body">
 
-        <Typography variant="h6" component="h1" color="inherit" className="text-center">
-          Madison County COVID-19 Cases
+        <br /> 
+        <Typography variant="h4" component="h1" color="inherit" className="text-center font-700">
+          Madison County COVID-19 R<sub>t</sub> Values
         </Typography>
+
+        <LastUpdated date={date} />
+        
 
         <br />
 
@@ -135,6 +145,8 @@ const App =() =>{
           }
 
       </div>
+
+      <DashboardFooter />
 
     </div>
   )

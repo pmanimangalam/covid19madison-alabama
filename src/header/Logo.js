@@ -11,8 +11,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   large: {
-    width: '140px',
-    height: '96px',
+    width: '175px',
+    height: '120px',
     backgroundColor: '#FFFFFF',
     padding: '10px 20px',
     position: 'absolute',

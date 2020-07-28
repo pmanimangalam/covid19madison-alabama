@@ -40,7 +40,7 @@ export default function CumulativeCases({countyDailyCounts}) {
 
   return (
     <div className="db-cumulative-cases">
-      <h3>Cumulative Cases</h3>
+      <h3>Cumulative cases for the County</h3>
       <ChartistGraph data={data} options={options} type={type} />
     </div>
   )

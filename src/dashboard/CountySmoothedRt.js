@@ -40,7 +40,7 @@ export default function CountySmoothedRt({countyDailySmoothedRt}) {
 
   return (
     <div className="db-rt-daily">
-      <h3>Rt Per Day (Smooth)</h3>
+      <h3>R<sub>t</sub> value (smoothed) for the County</h3>
       <ChartistGraph data={data} options={options} type={type} />
     </div>
   )
