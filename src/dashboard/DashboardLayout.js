@@ -2,12 +2,15 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-//import CountyDetails from './CountyDetails';
-import TotalCases from './TotalCases';
 
-import TotalDeaths from './TotalDeaths';
-import CasesYesterday from './CasesYesterday';
-import TestsReported from './TestsReported';
+import DashboardHeader from './DashboardHeader';
+
+//import CountyDetails from './CountyDetails';
+//import TotalCases from './TotalCases';
+
+//import TotalDeaths from './TotalDeaths';
+//import CasesYesterday from './CasesYesterday';
+//import TestsReported from './TestsReported';
 
 import CumulativeCases from './CumulativeCases';
 import NewCases from './NewCases';
@@ -45,7 +48,16 @@ export default function DashboardLayout({countyData, totalCasesData, totalDeaths
         </Grid>
       </Grid> */}
 
-      <Grid container spacing={5}>
+      <DashboardHeader 
+        totalCases={totalCasesData}
+        casesYesterday={casesYesterdayData} 
+        totalDeaths={totalDeathsData}
+        testsReported={testsReportedData}
+        countyDailySmoothedRt={countyDailySmoothedRtData}
+        countyDailyRt={countyDailyRtData}
+      />
+
+      {/* <Grid container spacing={5}>
         <Grid item lg={3} md={4} sm={6} xs={12}>
               <TotalCases totalCases={totalCasesData} />
         </Grid>
@@ -58,7 +70,7 @@ export default function DashboardLayout({countyData, totalCasesData, totalDeaths
         <Grid item lg={3} md={4} sm={6} xs={12}>
               <TestsReported testsReported={testsReportedData}/>
         </Grid>
-      </Grid>
+      </Grid> */}
 
       <br /><br />
       <Container maxWidth="lg" component="main">

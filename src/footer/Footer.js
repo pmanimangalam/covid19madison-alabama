@@ -19,9 +19,9 @@ export default function Footer() {
     <Container maxWidth="md" component="footer" className={classes.footer}>
       <Box mt={5}>
         <Typography variant="body2" color="textSecondary">
-          <Box color="text.primary" component="span">Rt value provided by </Box> Dr. Yi Tan.
-          <br />
           <Box color="text.primary" component="span">Developed by </Box> Praveen Manimangalam and Anirudh Bellamkonda.
+          <br />
+          <Box color="text.primary" component="span">Rt value provided by </Box> Dr. Yi Tan.
         </Typography>
       </Box>
     </Container>
