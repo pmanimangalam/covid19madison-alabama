@@ -6,6 +6,7 @@ export function formatCountyDailyCounts(countyDailyCounts,seriesKey,labelPlugin)
         labels : []
     };
     var checkLabelPlugin = labelPlugin?true:false;
+    var series = [];
     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     var dayTime = 24*60*60*1000;
     let dateLabels = null;
@@ -20,13 +21,15 @@ export function formatCountyDailyCounts(countyDailyCounts,seriesKey,labelPlugin)
         if(checkLabelPlugin) {
             config.series.push({
                 meta: dateLabels,
-                value: seriesValue
+                value: Number(seriesValue)
             });
+            series.push(Number(seriesValue));
         } else{
-            config.series.push(seriesValue);
+            config.series.push(Number(seriesValue));
+            series.push(Number(seriesValue));
         }
     }
-    config.high = Math.max(...config.series);
-    config.low  = Math.min(...config.series);
+    config.high = Math.max(...series);
+    config.low  = Math.min(...series);
     return config;
 }

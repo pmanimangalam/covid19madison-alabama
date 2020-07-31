@@ -5,24 +5,11 @@ import Container from '@material-ui/core/Container';
 
 import DashboardHeader from './DashboardHeader';
 
-//import CountyDetails from './CountyDetails';
-//import TotalCases from './TotalCases';
-
-//import TotalDeaths from './TotalDeaths';
-//import CasesYesterday from './CasesYesterday';
-//import TestsReported from './TestsReported';
-
 import CumulativeCases from './CumulativeCases';
 import NewCases from './NewCases';
-
 import CountyRt from './CountyRt';
 import CountySmoothedRt from './CountySmoothedRt';
-
-
-// import CumulativeDeaths from './CumulativeDeaths';
-// import NewDeaths from './NewDeaths';
-// import CumulativeTests from './CumulativeTests';
-// import NewTests from './NewTests';
+import AlSmoothedRt from './AlSmoothedRt';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -35,18 +22,10 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function DashboardLayout({countyData, totalCasesData, totalDeathsData, casesYesterdayData, testsReportedData, countyDailyCountsData, countyDailyRtData, countyDailySmoothedRtData}) {
+export default function DashboardLayout({countyData, totalCasesData, totalDeathsData, casesYesterdayData, testsReportedData, countyDailyCountsData, countyDailyRtData, countyDailySmoothedRtData, alDailySmoothedRtData}) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      {/* <Grid container justify={'center'}>
-        <Grid item lg={4} md={5} sm={6} xs={12}>
-              <CountyDetails alCountyData={countyData} 
-                totalCases={totalCasesData}
-                totalDeaths={totalDeathsData}/>
-              <br /><br />
-        </Grid>
-      </Grid> */}
 
       <DashboardHeader 
         totalCases={totalCasesData}
@@ -55,22 +34,8 @@ export default function DashboardLayout({countyData, totalCasesData, totalDeaths
         testsReported={testsReportedData}
         countyDailySmoothedRt={countyDailySmoothedRtData}
         countyDailyRt={countyDailyRtData}
+        alDailySmoothedRt={alDailySmoothedRtData}
       />
-
-      {/* <Grid container spacing={5}>
-        <Grid item lg={3} md={4} sm={6} xs={12}>
-              <TotalCases totalCases={totalCasesData} />
-        </Grid>
-        <Grid item lg={3} md={4} sm={6} xs={12}>
-              <TotalDeaths totalDeaths={totalDeathsData}/>
-        </Grid>
-        <Grid item lg={3} md={4} sm={6} xs={12}>
-              <CasesYesterday totalCases={totalCasesData} casesYesterday={casesYesterdayData}/>
-        </Grid>
-        <Grid item lg={3} md={4} sm={6} xs={12}>
-              <TestsReported testsReported={testsReportedData}/>
-        </Grid>
-      </Grid> */}
 
       <br /><br />
       <Container maxWidth="lg" component="main">
@@ -83,30 +48,16 @@ export default function DashboardLayout({countyData, totalCasesData, totalDeaths
         </Grid>
         <br />
         <Grid item lg={12} md={12} sm={12} xs={12}>
+          <AlSmoothedRt alDailySmoothedRt={alDailySmoothedRtData} />
+        </Grid>
+        <br />
+        <Grid item lg={12} md={12} sm={12} xs={12}>
           <NewCases countyDailyCounts={countyDailyCountsData} />
         </Grid>
         <br />
         <Grid item lg={12} md={12} sm={12} xs={12}>
           <CumulativeCases countyDailyCounts={countyDailyCountsData} />
         </Grid>
-        
-        {/* <Grid container spacing={3}>
-          <Grid item lg={6} md={6} sm={6} xs={12}>
-            <CumulativeDeaths countyDailyCounts={countyDailyCountsData} />
-          </Grid>
-          <Grid item lg={6} md={6} sm={6} xs={12}>
-            <NewDeaths countyDailyCounts={countyDailyCountsData} />
-          </Grid>
-        </Grid>
-
-        <Grid container spacing={3}>
-          <Grid item lg={6} md={6} sm={6} xs={12}>
-            <CumulativeTests countyDailyCounts={countyDailyCountsData} />
-          </Grid>
-          <Grid item lg={6} md={6} sm={6} xs={12}>
-            <NewTests countyDailyCounts={countyDailyCountsData} />
-          </Grid>
-        </Grid> */}
       </Container>
     </div>
   );

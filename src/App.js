@@ -4,7 +4,6 @@ import * as Constants from './constants';
 
 import DashboardHeader from './header/Header';
 import DashboardLayout from './dashboard/DashboardLayout';
-import DashboardFooter from './footer/Footer';
 import Typography from '@material-ui/core/Typography';
 import { csvToJson } from './utils/csvToJson';
 
@@ -18,6 +17,7 @@ const App =() =>{
   const [countyDailyCounts, setCountyDailyCounts] = useState([]);
   const [countyDailyRt, setCountyDailyRt] = useState([]);
   const [countyDailySmoothedRt, setCountyDailySmoothedRt] = useState([]);
+  const [alDailySmoothedRt, setAlDailySmoothedRt] = useState([]);
 
   const [totalCases, setTotalCases] = useState();
   const [totalDeaths, setTotalDeaths] = useState();
@@ -32,6 +32,7 @@ const App =() =>{
     getAlCountyDailyCounts();
     getAlCountyDailyRt();
     getAlCountyDailySmoothedRt();
+    getAlDailySmoothedRt();
   },[]);
 
   const getAlCounties = async () => {
@@ -71,22 +72,22 @@ const App =() =>{
     let nxtTestedValue = 0;
 
     for(let dataIndex in data){
-      preCaseValue = (dataIndex === 0)?0:data[dataIndex -1]?.cases;
-      nxtCaseValue = data[dataIndex]?.cases;
+      preCaseValue = (dataIndex === 0)?0:Number(data[dataIndex -1]?.cases);
+      nxtCaseValue = Number(data[dataIndex]?.cases);
 
-      preDeathValue = (dataIndex === 0)?0:data[dataIndex -1]?.deaths;
-      nxtDeathValue = data[dataIndex]?.deaths;
+      preDeathValue = (dataIndex === 0)?0:Number(data[dataIndex -1]?.deaths);
+      nxtDeathValue = Number(data[dataIndex]?.deaths);
 
-      preTestedValue = (dataIndex === 0)?0:data[dataIndex -1]?.tested;
-      nxtTestedValue = data[dataIndex]?.tested;
+      preTestedValue = (dataIndex === 0)?0:Number(data[dataIndex -1]?.tested);
+      nxtTestedValue = Number(data[dataIndex]?.tested);
 
       dataScale.push({
-        cases: data[dataIndex]?.cases,
+        cases: Number(data[dataIndex]?.cases),
         casesPerDay: (nxtCaseValue - preCaseValue < 0)?0:nxtCaseValue - preCaseValue,
         date: data[dataIndex]?.date,
-        deaths: data[dataIndex]?.deaths,
+        deaths: Number(data[dataIndex]?.deaths),
         deathsPerDay: (nxtDeathValue - preDeathValue < 0)?0:nxtDeathValue - preDeathValue,
-        tested: data[dataIndex]?.tested,
+        tested: Number(data[dataIndex]?.tested),
         testedPerDay: (nxtTestedValue - preTestedValue < 0)?0:nxtTestedValue - preTestedValue,
       })
     }
@@ -95,7 +96,7 @@ const App =() =>{
   }
 
   const getAlCountyDailyRt = async () => {
-    let api_url = `./data/Madison${Constants.AL_COUNTY_RT}`;
+    let api_url = Constants.AL_COUNTY_RT;
     setCountyDailyRt([]);
     const response = await fetch(api_url);
     const data = await response.text();
@@ -104,12 +105,21 @@ const App =() =>{
   }
 
   const getAlCountyDailySmoothedRt = async () => {
-    let api_url = `./data/Madison${Constants.AL_COUNTY_SMOOTHED_RT}`;
+    let api_url = Constants.AL_COUNTY_SMOOTHED_RT;
     setCountyDailySmoothedRt([]);
     const response = await fetch(api_url);
     const data = await response.text();
     const dataToJson = csvToJson(data);
     setCountyDailySmoothedRt(dataToJson);
+  }
+
+  const getAlDailySmoothedRt = async () => {
+    let api_url = Constants.AL_SMOOTHED_RT;
+    setAlDailySmoothedRt([]);
+    const response = await fetch(api_url);
+    const data = await response.text();
+    const dataToJson = csvToJson(data);
+    setAlDailySmoothedRt(dataToJson);
   }
 
 
@@ -126,8 +136,6 @@ const App =() =>{
         </Typography>
 
         <LastUpdated date={date} />
-        
-
         <br />
 
         {loading && <PageLoading />}
@@ -141,12 +149,11 @@ const App =() =>{
                 testsReportedData={testsReported} 
                 countyDailyCountsData={countyDailyCounts}
                 countyDailyRtData={countyDailyRt}
-                countyDailySmoothedRtData={countyDailySmoothedRt} />
+                countyDailySmoothedRtData={countyDailySmoothedRt} 
+                alDailySmoothedRtData={alDailySmoothedRt} />
           }
 
       </div>
-
-      <DashboardFooter />
 
     </div>
   )

@@ -1,11 +1,12 @@
 import React from 'react';
 import ChartistGraph from 'react-chartist';
-import { formatCountyDailyCounts } from './../utils/formatCountyDailyCounts';
+import { formatCountyDailyCounts } from '../utils/formatCountyDailyCounts';
+import ChartistTooltip from 'chartist-plugin-tooltips-updated';
 
-export default function NewDeaths({countyDailyCounts}) {
-
+export default function AlSmoothedRt({alDailySmoothedRt}) {
+  
   var config = {};
-  config = formatCountyDailyCounts(countyDailyCounts,'deathsPerDay');
+  config = formatCountyDailyCounts(alDailySmoothedRt,'r_t_most_likely',true);
 
   var data = {
     labels: config?.labels,
@@ -26,15 +27,20 @@ export default function NewDeaths({countyDailyCounts}) {
       }
     },
     showArea: true,
-    showPoint: false,
+    showPoint: true,
     height: '250px',
+    plugins: [
+      ChartistTooltip({
+        appendToBody: true
+      })
+    ],
   };
 
   var type = 'Line';
 
   return (
-    <div className="db-cumulative-deaths">
-      <h3>Deaths Per Day</h3>
+    <div className="db-rt-daily">
+      <h3>R<sub>t</sub> value for Alabama (smoothed)</h3>
       <ChartistGraph data={data} options={options} type={type} />
     </div>
   )
