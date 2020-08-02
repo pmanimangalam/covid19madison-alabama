@@ -64,7 +64,7 @@ export default function DashboardHeader({totalCases,casesYesterday,totalDeaths,t
                 </Paper>
             </Grid>
 
-            <Grid item="true" lg={2} md={3} sm={4} xs={4}>
+            {/* <Grid item="true" lg={2} md={3} sm={4} xs={4}>
                 <Paper className={classes.paper} elevation={3}>
                     <Typography>
                         <Box color="text.primary">New Cases</Box>
@@ -84,7 +84,7 @@ export default function DashboardHeader({totalCases,casesYesterday,totalDeaths,t
                         <Box color="primary.main">{totalCases?.cases?.toLocaleString()}</Box>
                     </Typography>
                 </Paper>
-            </Grid>
+            </Grid> */}
 
             {/* <Grid item="true" lg={2} md={3} sm={4} xs={4}>
                 <Paper className={classes.paper} elevation={3}>

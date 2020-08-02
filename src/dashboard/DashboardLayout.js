@@ -51,13 +51,13 @@ export default function DashboardLayout({countyData, totalCasesData, totalDeaths
           <AlSmoothedRt alDailySmoothedRt={alDailySmoothedRtData} />
         </Grid>
         <br />
-        <Grid item lg={12} md={12} sm={12} xs={12}>
+        {/* <Grid item lg={12} md={12} sm={12} xs={12}>
           <NewCases countyDailyCounts={countyDailyCountsData} />
         </Grid>
         <br />
         <Grid item lg={12} md={12} sm={12} xs={12}>
           <CumulativeCases countyDailyCounts={countyDailyCountsData} />
-        </Grid>
+        </Grid> */}
       </Container>
     </div>
   );
